@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="ja" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>無重力 予定表 | Japanese Antigravity Void Todo</title>
+    
+    <!-- Favicon: Floating Torii in Cosmic Void SVG -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230b0d1a'/><circle cx='50' cy='50' r='35' fill='none' stroke='%2338bdf8' stroke-width='2' opacity='0.4'/><path d='M25 35 L75 35 M30 45 L70 45 M38 35 L38 75 M62 35 L62 75' stroke='%23e63946' stroke-width='4' stroke-linecap='round'/></svg>">
+
+    <!-- Google Fonts: Noto Serif JP (Calligraphic / Shrine) & Plus Jakarta Sans (Clean Modern) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        void: {
+                            950: '#070810',
+                            900: '#0b0d1a',
+                            850: '#101324',
+                            800: '#16192e',
+                            700: '#232847',
+                        },
+                        torii: {
+                            crimson: '#e63946',
+                            deep: '#bc3c30',
+                            glow: '#ff4d5a',
+                        },
+                        soul: {
+                            cyan: '#38bdf8',
+                            glow: '#67e8f9',
+                            teal: '#06b6d4',
+                        },
+                        sumi: {
+                            white: '#f1f5f9',
+                            silver: '#cbd5e1',
+                            muted: '#94a3b8',
+                            dark: '#0f172a',
+                        },
+                        washi: 'rgba(255, 255, 255, 0.07)',
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif JP"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"Space Grotesk"', 'monospace'],
+                    },
+                    boxShadow: {
+                        'soul-glow': '0 0 25px -5px rgba(56, 189, 248, 0.4), 0 0 10px rgba(103, 232, 249, 0.25)',
+                        'torii-glow': '0 0 25px -5px rgba(230, 57, 70, 0.5), 0 0 12px rgba(255, 77, 90, 0.3)',
+                        'washi-card': '0 10px 30px -10px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.15)',
+                        'washi-hover': '0 20px 45px -10px rgba(56, 189, 248, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base Cosmic Atmosphere & Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #0b0d1a;
+            color: #f1f5f9;
+            overflow-x: hidden;
+            min-height: 100vh;
+            selection-background-color: #e63946;
+            selection-color: #ffffff;
+        }
+
+        ::selection {
+            background: rgba(230, 57, 70, 0.7);
+            color: #ffffff;
+        }
+
+        /* Upward Floating Drift Keyframes (Reverse Gravity) */
+        @keyframes upwardFloat {
+            0% {
+                transform: translateY(105vh) rotate(0deg) translateX(0);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.8;
+            }
+            85% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg) translateX(40px);
+                opacity: 0;
+            }
+        }
+
+        /* Weightless Bobbing Animations with Variable Timing */
+        @keyframes floatBob1 {
+            0% { transform: translateY(0px) rotate(-1deg); }
+            50% { transform: translateY(-7px) rotate(0.5deg); }
+            100% { transform: translateY(0px) rotate(-1deg); }
+        }
+
+        @keyframes floatBob2 {
+            0% { transform: translateY(0px) rotate(1.2deg); }
+            50% { transform: translateY(-9px) rotate(-0.3deg); }
+            100% { transform: translateY(0px) rotate(1.2deg); }
+        }
+
+        @keyframes floatBob3 {
+            0% { transform: translateY(0px) rotate(-0.6deg); }
+            50% { transform: translateY(-6px) rotate(1.0deg); }
+            100% { transform: translateY(0px) rotate(-0.6deg); }
+        }
+
+        @keyframes floatBob4 {
+            0% { transform: translateY(0px) rotate(0.8deg); }
+            50% { transform: translateY(-8px) rotate(-0.8deg); }
+            100% { transform: translateY(0px) rotate(0.8deg); }
+        }
+
+        .float-organics-1 { animation: floatBob1 4.5s ease-in-out infinite; }
+        .float-organics-2 { animation: floatBob2 5.8s ease-in-out 0.8s infinite; }
+        .float-organics-3 { animation: floatBob3 6.2s ease-in-out 1.5s infinite; }
+        .float-organics-4 { animation: floatBob4 5.2s ease-in-out 2.2s infinite; }
+
+        /* Slow Pulse for Shinto Soul Flame / Torii Altar */
+        @keyframes soulPulse {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(56, 189, 248, 0.25), inset 0 0 10px rgba(56, 189, 248, 0.1);
+                border-color: rgba(56, 189, 248, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(56, 189, 248, 0.5), inset 0 0 15px rgba(56, 189, 248, 0.25);
+                border-color: rgba(103, 232, 249, 0.6);
+            }
+        }
+
+        .soul-aura {
+            animation: soulPulse 4s ease-in-out infinite;
+        }
+
+        /* Authentic Hanko Stamp Effect (Completed Seal) */
+        .hanko-seal {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #e63946;
+            color: #e63946;
+            padding: 2px 8px;
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 900;
+            letter-spacing: 0.18em;
+            text-shadow: 0 0 8px rgba(230, 57, 70, 0.6);
+            box-shadow: 0 0 12px rgba(230, 57, 70, 0.4), inset 0 0 6px rgba(230, 57, 70, 0.3);
+            border-radius: 4px;
+            background: rgba(230, 57, 70, 0.08);
+            backdrop-filter: blur(4px);
+            user-select: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: stampIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .hanko-seal::before {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            border: 1px dashed rgba(230, 57, 70, 0.5);
+            pointer-events: none;
+        }
+
+        @keyframes stampIn {
+            0% {
+                opacity: 0;
+                transform: scale(2.2) rotate(-25deg);
+                filter: blur(6px);
+            }
+            70% {
+                transform: scale(0.92) rotate(6deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(5deg);
+                filter: blur(0);
+            }
+        }
+
+        /* Completed Ascended Card Transition */
+        .card-ascended {
+            opacity: 0.58 !important;
+            filter: contrast(0.95) saturate(0.85);
+            border-color: rgba(230, 57, 70, 0.3) !important;
+            background: rgba(22, 25, 46, 0.35) !important;
+            box-shadow: 0 4px 20px -5px rgba(230, 57, 70, 0.15) !important;
+        }
+
+        .card-ascended:hover {
+            opacity: 0.85 !important;
+            transform: translateY(-4px) scale(1.01) !important;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0d1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(56, 189, 248, 0.25);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(56, 189, 248, 0.5);
+        }
+
+        /* Magnetic Hover Dynamic State */
+        .magnetic-card {
+            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                        box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+                        border-color 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+                        background-color 0.4s ease,
+                        opacity 0.4s ease;
+        }
+
+        .magnetic-card:hover {
+            transform: translateY(-8px) scale(1.018) !important;
+            z-index: 20;
+            border-color: rgba(56, 189, 248, 0.55) !important;
+            box-shadow: 0 20px 45px -10px rgba(56, 189, 248, 0.3), 
+                        0 0 20px rgba(103, 232, 249, 0.2), 
+                        inset 0 1px 2px rgba(255, 255, 255, 0.25) !important;
+        }
+
+        /* Shinto Vertical Writing Kicker */
+        .writing-vertical {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            letter-spacing: 0.25em;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased relative min-h-screen flex flex-col justify-between selection:bg-torii-crimson selection:text-white">
+
+    <!-- ============================================================== -->
+    <!-- INTERACTIVE COSMIC CANVAS (UPWARD FLOATING SAKURA & ZEN DUST)  -->
+    <!-- ============================================================== -->
+    <canvas id="voidCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+    <!-- Celestial Nebula Ambient Glows -->
+    <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+        <!-- Deep cosmic center flare -->
+        <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[750px] h-[750px] bg-gradient-to-b from-indigo-700/20 via-purple-900/15 to-transparent rounded-full blur-[140px]"></div>
+        <!-- Luminous Cyan Soul Portal (Bottom-Left) -->
+        <div class="absolute -bottom-24 -left-20 w-[550px] h-[550px] bg-soul-cyan/15 rounded-full blur-[130px]"></div>
+        <!-- Torii Crimson Energy Distortion (Top-Right) -->
+        <div class="absolute top-1/4 -right-24 w-[500px] h-[500px] bg-torii-crimson/15 rounded-full blur-[120px]"></div>
+        <!-- Celestial Star Grid Mesh -->
+        <div class="absolute inset-0 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:40px_40px] opacity-[0.06]"></div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- TOP TELEMETRY HUD BAR                                          -->
+    <!-- ============================================================== -->
+    <header class="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 pt-6 pb-2">
+        <div class="flex items-center justify-between gap-4 py-2 px-4 rounded-full bg-void-900/60 border border-white/10 backdrop-blur-md shadow-lg text-xs">
+            <!-- Left: Zero-G Status & Telemetry -->
+            <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2 px-2.5 py-1 rounded-full bg-soul-cyan/10 border border-soul-cyan/30 text-soul-glow">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-soul-cyan opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-soul-cyan"></span>
+                    </span>
+                    <span class="font-mono tracking-wider font-semibold">重力遮断 0.00 G</span>
+                </div>
+                <div class="hidden md:flex items-center gap-1.5 text-sumi-muted font-mono tracking-widest text-[11px]">
+                    <span class="text-torii-crimson font-serif">⛩</span>
+                    <span>虚空神殿 // CELESTIAL SANCTUARY</span>
+                </div>
+            </div>
+
+            <!-- Right: Controls (Sound, Task Stats, Clear Completed) -->
+            <div class="flex items-center gap-3">
+                <!-- Sound Toggle Button -->
+                <button 
+                    id="soundToggleBtn" 
+                    title="Efek Suara Kosmik (Zen Singing Bowl)"
+                    class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 text-sumi-silver hover:text-white border border-white/10 transition-colors"
+                >
+                    <span id="soundIcon" class="text-sm">🔔</span>
+                    <span id="soundLabel" class="hidden sm:inline font-mono text-[11px]">音響: ON</span>
+                </button>
+
+                <!-- Orbit Progress Counter -->
+                <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-void-850/80 border border-white/10 font-mono text-[11px] text-sumi-silver">
+                    <span class="text-soul-cyan">浮遊中:</span>
+                    <span id="activeCountBadge" class="font-bold text-white">0</span>
+                    <span class="text-sumi-muted">/</span>
+                    <span class="text-torii-glow">昇天:</span>
+                    <span id="completedCountBadge" class="font-bold text-white">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================== -->
+    <!-- MAIN CONTENT CONTAINER                                         -->
+    <!-- ============================================================== -->
+    <main class="relative z-10 w-full max-w-3xl mx-auto px-4 sm:px-6 py-6 flex-1 flex flex-col">
+
+        <!-- ========================================== -->
+        <!-- SHRINE HERO BRANDING & LOGO               -->
+        <!-- ========================================== -->
+        <section class="text-center mb-8 relative">
+            <!-- Floating Japanese Watermark / Seal in Background -->
+            <div class="absolute left-1/2 -top-6 -translate-x-1/2 text-8xl sm:text-9xl font-serif font-black text-white/[0.025] select-none pointer-events-none tracking-widest whitespace-nowrap">
+                無重力空間
+            </div>
+
+            <!-- Subtitle Kicker with Shinto Knot Accent -->
+            <div class="inline-flex items-center gap-3 mb-3">
+                <span class="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent via-soul-cyan/60 to-transparent"></span>
+                <span class="text-[11px] sm:text-xs font-serif uppercase tracking-[0.35em] text-soul-glow drop-shadow-[0_0_8px_rgba(56,189,248,0.5)]">
+                    天界浮遊の聖域 • CELESTIAL FLOATING SANCTUARY
+                </span>
+                <span class="h-[1px] w-8 sm:w-16 bg-gradient-to-l from-transparent via-soul-cyan/60 to-transparent"></span>
+            </div>
+
+            <!-- Main Title: 「無重力 予定表」 -->
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif font-black tracking-wider text-sumi-white flex items-center justify-center gap-3 drop-shadow-[0_0_20px_rgba(241,245,249,0.3)]">
+                <span class="text-torii-crimson select-none drop-shadow-[0_0_15px_rgba(230,57,70,0.6)]">⛩</span>
+                <span class="bg-gradient-to-b from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
+                    無重力 予定表
+                </span>
+            </h1>
+
+            <!-- Descriptive Subtitle in Indonesian & Japanese -->
+            <p class="mt-2.5 text-xs sm:text-sm font-serif text-sumi-silver/80 tracking-wide max-w-md mx-auto">
+                Lepaskan beban tugas dari gravitasi duniawi. <br class="sm:hidden">
+                <span class="text-soul-glow/90 italic">Biarkan fokusmu melayang bebas di ruang hening kosmik.</span>
+            </p>
+
+            <!-- Celestial Coordinates HUD Indicator -->
+            <div class="mt-3 flex items-center justify-center gap-4 text-[10px] font-mono text-sumi-muted tracking-widest">
+                <span>RA 18h 36m // DEC +38° 47'</span>
+                <span>•</span>
+                <span class="text-soul-cyan">GRAVITY_FIELD: NULLIFIED</span>
+                <span>•</span>
+                <span>STATUS: NOMINAL</span>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- ALTAR INPUT (TUGAS BARU / 奉納)            -->
+        <!-- ========================================== -->
+        <section class="mb-8">
+            <div class="relative p-[1px] rounded-2xl bg-gradient-to-b from-soul-cyan/40 via-white/10 to-torii-crimson/30 shadow-washi-card">
+                <form id="todoForm" class="rounded-[15px] bg-void-900/80 backdrop-blur-xl p-4 sm:p-5 border border-white/10">
+                    
+                    <div class="flex flex-col sm:flex-row items-stretch gap-3">
+                        <!-- Task Text Input -->
+                        <div class="relative flex-1">
+                            <input 
+                                type="text" 
+                                id="taskInput" 
+                                placeholder="新しい任務を入力... (Tulis tugas barumu di sini...)" 
+                                autocomplete="off"
+                                required
+                                class="w-full bg-void-950/60 border border-white/15 focus:border-soul-cyan rounded-xl px-4 py-3 text-sm text-sumi-white placeholder-sumi-muted/60 focus:outline-none focus:ring-2 focus:ring-soul-cyan/30 transition-all font-sans"
+                            >
+                            <!-- Glowing accent line -->
+                            <div class="absolute bottom-0 left-3 right-3 h-[1px] bg-gradient-to-r from-transparent via-soul-cyan/40 to-transparent pointer-events-none"></div>
+                        </div>
+
+                        <!-- Tag Selection (Dropdown/Preset) -->
+                        <div class="relative sm:w-44">
+                            <select 
+                                id="tagSelect" 
+                                class="w-full h-full bg-void-950/60 border border-white/15 focus:border-soul-cyan rounded-xl px-3 py-3 text-xs text-sumi-silver focus:outline-none focus:ring-2 focus:ring-soul-cyan/30 transition-all font-serif cursor-pointer appearance-none"
+                            >
+                                <option value="日常" class="bg-void-900 text-sumi-white">日常 (Harian)</option>
+                                <option value="修行" class="bg-void-900 text-sumi-white">修行 (Fokus/Coding)</option>
+                                <option value="精神" class="bg-void-900 text-sumi-white">精神 (Meditasi/Santai)</option>
+                                <option value="極秘" class="bg-void-900 text-sumi-white">極秘 (Prioritas Tinggi)</option>
+                                <option value="読書" class="bg-void-900 text-sumi-white">読書 (Belajar/Baca)</option>
+                            </select>
+                            <div class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-xs text-sumi-muted">
+                                ▾
+                            </div>
+                        </div>
+
+                        <!-- Add Button (Kanji: 追加) with Torii Crimson Gradient -->
+                        <button 
+                            type="submit" 
+                            class="relative group overflow-hidden px-6 py-3 rounded-xl bg-gradient-to-r from-torii-crimson via-torii-deep to-torii-crimson bg-[length:200%_auto] hover:bg-right transition-all duration-300 text-white font-serif font-bold text-sm tracking-widest shadow-torii-glow hover:scale-[1.03] active:scale-[0.98] flex items-center justify-center gap-2.5 flex-shrink-0"
+                        >
+                            <span class="relative z-10 flex items-center gap-2">
+                                <span class="text-base font-sans font-light leading-none">+</span>
+                                <span>追加</span>
+                                <span class="text-[10px] font-sans font-normal opacity-75 uppercase tracking-normal">(Tambah)</span>
+                            </span>
+                            <!-- Button Shimmer Shine -->
+                            <div class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                        </button>
+                    </div>
+
+                    <!-- Filter Quick Tags Preset & Search Bar -->
+                    <div class="mt-4 pt-3 border-t border-white/5 flex flex-wrap items-center justify-between gap-3 text-xs">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-sumi-muted text-[11px] font-serif">Tag Cepat:</span>
+                            <button type="button" onclick="setQuickTag('日常')" class="px-2 py-0.5 rounded-md bg-white/5 hover:bg-white/10 text-sumi-silver border border-white/10 text-[10px] transition-colors">#日常</button>
+                            <button type="button" onclick="setQuickTag('修行')" class="px-2 py-0.5 rounded-md bg-white/5 hover:bg-white/10 text-soul-cyan border border-soul-cyan/20 text-[10px] transition-colors">#修行</button>
+                            <button type="button" onclick="setQuickTag('精神')" class="px-2 py-0.5 rounded-md bg-white/5 hover:bg-white/10 text-purple-300 border border-purple-500/20 text-[10px] transition-colors">#精神</button>
+                            <button type="button" onclick="setQuickTag('極秘')" class="px-2 py-0.5 rounded-md bg-white/5 hover:bg-white/10 text-torii-glow border border-torii-crimson/20 text-[10px] transition-colors">#極秘</button>
+                        </div>
+
+                        <!-- Live Filter Tab Buttons -->
+                        <div class="flex items-center gap-1 bg-void-950/80 p-1 rounded-lg border border-white/10">
+                            <button type="button" onclick="setFilter('all')" id="filter-all" class="filter-btn px-2.5 py-0.5 rounded text-[11px] font-serif transition-all bg-soul-cyan/20 text-soul-glow border border-soul-cyan/40">
+                                全て (<span id="count-all">0</span>)
+                            </button>
+                            <button type="button" onclick="setFilter('active')" id="filter-active" class="filter-btn px-2.5 py-0.5 rounded text-[11px] font-serif transition-all text-sumi-muted hover:text-white">
+                                浮遊 (<span id="count-active">0</span>)
+                            </button>
+                            <button type="button" onclick="setFilter('completed')" id="filter-completed" class="filter-btn px-2.5 py-0.5 rounded text-[11px] font-serif transition-all text-sumi-muted hover:text-white">
+                                昇天 (<span id="count-completed">0</span>)
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TODO LIST CARDS (WEIGHTLESS BOBBING)        -->
+        <!-- ========================================== -->
+        <section class="space-y-4 relative min-h-[240px]" id="todoContainer">
+            <!-- Dynamic Todo Cards will be rendered here by JavaScript -->
+        </section>
+
+        <!-- Clear Completed / Reset Altar Buttons -->
+        <div id="bulkActions" class="mt-8 flex items-center justify-between text-xs font-serif text-sumi-muted px-2">
+            <button 
+                id="clearCompletedBtn" 
+                onclick="clearCompletedTasks()" 
+                class="hover:text-torii-glow transition-colors flex items-center gap-1.5 opacity-75 hover:opacity-100"
+            >
+                <span>⛩</span>
+                <span>昇天した任務を清める (Hapus Semua Selesai)</span>
+            </button>
+
+            <button 
+                onclick="resetDefaultTasks()" 
+                class="hover:text-soul-glow transition-colors flex items-center gap-1.5 opacity-60 hover:opacity-100 text-[11px]"
+            >
+                <span>↺</span>
+                <span>Muat Contoh Tugas Asli</span>
+            </button>
+        </div>
+
+    </main>
+
+    <!-- ============================================================== -->
+    <!-- FOOTER WITH SHINTO ZEN QUOTE                                   -->
+    <!-- ============================================================== -->
+    <footer class="relative z-10 w-full py-8 text-center text-xs font-serif text-sumi-muted/70 border-t border-white/5 mt-12 bg-void-950/40 backdrop-blur-sm">
+        <div class="max-w-md mx-auto px-4 space-y-2">
+            <div class="flex items-center justify-center gap-3 text-torii-crimson/60">
+                <span>✦</span>
+                <span class="tracking-[0.3em] uppercase text-sumi-silver/80">心頭滅却すれば火も自ずから涼し</span>
+                <span>✦</span>
+            </div>
+            <p class="text-[11px] text-sumi-muted">
+                Kendalikan pikiran, maka gravitasi dan kekacauan dunia akan sirna.
+            </p>
+            <div class="pt-2 font-mono text-[10px] text-sumi-muted/50 tracking-wider">
+                JAPANESE ANTIGRAVITY VOID EDITION // ZERO GRAVITY TODO SYSTEM
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================== -->
+    <!-- JAVASCRIPT ENGINE: LOCALSTORAGE, AUDIO, PHYSICS & ANIMATIONS  -->
+    <!-- ============================================================== -->
+    <script>
+        // -------------------------------------------------------------
+        // 1. STATE & STORAGE MANAGEMENT
+        // -------------------------------------------------------------
+        const STORAGE_KEY = 'japanese_antigravity_todos_v2';
+        const SOUND_KEY = 'japanese_antigravity_sound_enabled';
+
+        // Initial default atmospheric tasks
+        const DEFAULT_TODOS = [
+            {
+                id: 'task-1',
+                task: 'Membaca Kitab Zen & Refleksi 30 Menit (読書と瞑想)',
+                tag: '精神',
+                completed: false,
+                createdAt: '08:00 AM',
+                tilt: '-0.8deg',
+                animClass: 'float-organics-1'
+            },
+            {
+                id: 'task-2',
+                task: 'Rancang Arsitektur Zero Gravity UI (電脳構造設計)',
+                tag: '修行',
+                completed: false,
+                createdAt: '09:15 AM',
+                tilt: '1.2deg',
+                animClass: 'float-organics-2'
+            },
+            {
+                id: 'task-3',
+                task: 'Menikmati seduhan teh hijau matcha di angkasa (宇宙茶道)',
+                tag: '日常',
+                completed: true,
+                createdAt: '07:30 AM',
+                tilt: '-0.4deg',
+                animClass: 'float-organics-3'
+            }
+        ];
+
+        let todos = loadTodos();
+        let currentFilter = 'all';
+        let soundEnabled = localStorage.getItem(SOUND_KEY) !== 'false'; // default true
+
+        function loadTodos() {
+            try {
+                const stored = localStorage.getItem(STORAGE_KEY);
+                if (stored) {
+                    const parsed = JSON.parse(stored);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        return parsed;
+                    }
+                }
+            } catch (e) {
+                console.error("Gagal memuat task dari localStorage:", e);
+            }
+            return [...DEFAULT_TODOS];
+        }
+
+        function saveTodos() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+            } catch (e) {
+                console.error("Gagal menyimpan task:", e);
+            }
+            updateCounters();
+        }
+
+        // -------------------------------------------------------------
+        // 2. SYNTHESIZED WEB AUDIO API (ZEN SINGING BOWL & CHIMES)
+        // -------------------------------------------------------------
+        let audioCtx = null;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) {
+                    audioCtx = new AudioContext();
+                }
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function playSound(type) {
+            if (!soundEnabled) return;
+            try {
+                const ctx = getAudioContext();
+                if (!ctx) return;
+
+                const now = ctx.currentTime;
+
+                if (type === 'complete') {
+                    // Tibetan Singing Bowl Harmonic Chime (432Hz fundamental + harmonic overtone)
+                    const osc1 = ctx.createOscillator();
+                    const osc2 = ctx.createOscillator();
+                    const gainNode = ctx.createGain();
+
+                    osc1.type = 'sine';
+                    osc1.frequency.setValueAtTime(432, now); // A4 Zen frequency
+                    osc1.frequency.exponentialRampToValueAtTime(430, now + 1.8);
+
+                    osc2.type = 'sine';
+                    osc2.frequency.setValueAtTime(864, now); // 1st Harmonic overtone
+                    osc2.frequency.exponentialRampToValueAtTime(860, now + 1.2);
+
+                    gainNode.gain.setValueAtTime(0.01, now);
+                    gainNode.gain.linearRampToValueAtTime(0.28, now + 0.04);
+                    gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 1.9);
+
+                    osc1.connect(gainNode);
+                    osc2.connect(gainNode);
+                    gainNode.connect(ctx.destination);
+
+                    osc1.start(now);
+                    osc2.start(now);
+                    osc1.stop(now + 2.0);
+                    osc2.stop(now + 2.0);
+
+                } else if (type === 'add') {
+                    // Crystalline Harp Chime (Upward ascending celestial interval)
+                    const freqs = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+                    freqs.forEach((freq, idx) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        const noteTime = now + (idx * 0.07);
+
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, noteTime);
+
+                        gain.gain.setValueAtTime(0.01, noteTime);
+                        gain.gain.linearRampToValueAtTime(0.18, noteTime + 0.02);
+                        gain.gain.exponentialRampToValueAtTime(0.0001, noteTime + 0.6);
+
+                        osc.connect(gain);
+                        gain.connect(ctx.destination);
+
+                        osc.start(noteTime);
+                        osc.stop(noteTime + 0.65);
+                    });
+
+                } else if (type === 'delete') {
+                    // Ethereal dispersion / void swoosh
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(320, now);
+                    osc.frequency.exponentialRampToValueAtTime(80, now + 0.35);
+
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+
+                    osc.start(now);
+                    osc.stop(now + 0.36);
+                }
+            } catch (err) {
+                // Audio might be blocked until user interacts
+            }
+        }
+
+        // Toggle sound button handler
+        const soundToggleBtn = document.getElementById('soundToggleBtn');
+        const soundIcon = document.getElementById('soundIcon');
+        const soundLabel = document.getElementById('soundLabel');
+
+        function updateSoundUI() {
+            if (soundEnabled) {
+                soundIcon.textContent = '🔔';
+                soundLabel.textContent = '音響: ON';
+                soundToggleBtn.classList.remove('opacity-50');
+            } else {
+                soundIcon.textContent = '🔕';
+                soundLabel.textContent = '音響: OFF';
+                soundToggleBtn.classList.add('opacity-50');
+            }
+        }
+
+        soundToggleBtn.addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            localStorage.setItem(SOUND_KEY, soundEnabled);
+            updateSoundUI();
+            if (soundEnabled) playSound('add');
+        });
+        updateSoundUI();
+
+        // -------------------------------------------------------------
+        // 3. TODO OPERATIONS (ADD, TOGGLE, DELETE, FILTER)
+        // -------------------------------------------------------------
+        const todoForm = document.getElementById('todoForm');
+        const taskInput = document.getElementById('taskInput');
+        const tagSelect = document.getElementById('tagSelect');
+        const todoContainer = document.getElementById('todoContainer');
+
+        const animVariations = ['float-organics-1', 'float-organics-2', 'float-organics-3', 'float-organics-4'];
+        const tiltVariations = ['-1.1deg', '0.9deg', '-0.6deg', '1.3deg', '-0.3deg', '0.7deg'];
+
+        function getRandomElement(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function getCurrentTimeFormatted() {
+            const date = new Date();
+            let hours = date.getHours();
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;
+            return `${hours}:${minutes} ${ampm}`;
+        }
+
+        // Form Submit: Tambah Task
+        todoForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const text = taskInput.value.trim();
+            if (!text) return;
+
+            const newTask = {
+                id: 'task-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
+                task: text,
+                tag: tagSelect.value || '日常',
+                completed: false,
+                createdAt: getCurrentTimeFormatted(),
+                tilt: getRandomElement(tiltVariations),
+                animClass: getRandomElement(animVariations)
+            };
+
+            todos.unshift(newTask);
+            saveTodos();
+            renderTodos();
+
+            taskInput.value = '';
+            taskInput.focus();
+            playSound('add');
+        });
+
+        // Toggle Task Complete
+        window.toggleTodo = function(id) {
+            const task = todos.find(t => t.id === id);
+            if (!task) return;
+
+            task.completed = !task.completed;
+            saveTodos();
+            
+            // Trigger visual feedback and sound
+            if (task.completed) {
+                playSound('complete');
+                triggerStardustBurst(id);
+            }
+
+            renderTodos();
+        };
+
+        // Delete Task with Smooth Dissolve Animation
+        window.deleteTodo = function(id) {
+            const cardEl = document.getElementById(id);
+            if (cardEl) {
+                // Apply dissolution animation
+                cardEl.style.transition = 'all 0.45s cubic-bezier(0.4, 0, 0.2, 1)';
+                cardEl.style.transform = 'translateY(-20px) scale(0.92) rotate(4deg)';
+                cardEl.style.opacity = '0';
+                cardEl.style.filter = 'blur(8px)';
+            }
+
+            playSound('delete');
+
+            setTimeout(() => {
+                todos = todos.filter(t => t.id !== id);
+                saveTodos();
+                renderTodos();
+            }, 350);
+        };
+
+        // Quick Tag setter
+        window.setQuickTag = function(tagName) {
+            tagSelect.value = tagName;
+            taskInput.focus();
+        };
+
+        // Filter Setter
+        window.setFilter = function(filterName) {
+            currentFilter = filterName;
+            
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-soul-cyan/20', 'text-soul-glow', 'border', 'border-soul-cyan/40');
+                btn.classList.add('text-sumi-muted');
+            });
+
+            const activeBtn = document.getElementById(`filter-${filterName}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-sumi-muted');
+                activeBtn.classList.add('bg-soul-cyan/20', 'text-soul-glow', 'border', 'border-soul-cyan/40');
+            }
+
+            renderTodos();
+        };
+
+        // Clear all completed tasks
+        window.clearCompletedTasks = function() {
+            const completedCount = todos.filter(t => t.completed).length;
+            if (completedCount === 0) return;
+
+            if (confirm(`Apakah Anda yakin ingin melepaskan ${completedCount} tugas yang telah selesai ke dalam kekosongan semesta?`)) {
+                todos = todos.filter(t => !t.completed);
+                saveTodos();
+                renderTodos();
+                playSound('delete');
+            }
+        };
+
+        // Reset to default sample tasks
+        window.resetDefaultTasks = function() {
+            todos = JSON.parse(JSON.stringify(DEFAULT_TODOS));
+            saveTodos();
+            renderTodos();
+            playSound('add');
+        };
+
+        // Update task count indicators
+        function updateCounters() {
+            const total = todos.length;
+            const completed = todos.filter(t => t.completed).length;
+            const active = total - completed;
+
+            document.getElementById('count-all').textContent = total;
+            document.getElementById('count-active').textContent = active;
+            document.getElementById('count-completed').textContent = completed;
+
+            document.getElementById('activeCountBadge').textContent = active;
+            document.getElementById('completedCountBadge').textContent = completed;
+
+            const bulkActions = document.getElementById('bulkActions');
+            if (bulkActions) {
+                bulkActions.style.display = total === 0 ? 'none' : 'flex';
+            }
+        }
+
+        // -------------------------------------------------------------
+        // 4. RENDER TODO CARDS WITH ORGANIC ZERO-G PHYSICS
+        // -------------------------------------------------------------
+        function renderTodos() {
+            updateCounters();
+
+            let filteredTodos = todos;
+            if (currentFilter === 'active') {
+                filteredTodos = todos.filter(t => !t.completed);
+            } else if (currentFilter === 'completed') {
+                filteredTodos = todos.filter(t => t.completed);
+            }
+
+            if (filteredTodos.length === 0) {
+                let emptyMessage = 'Semua tugas telah melayang terselesaikan.';
+                let emptySub = 'Kosmik dalam keadaan tenang & seimbang. Tambahkan tugas baru untuk memulai.';
+                if (currentFilter === 'active') {
+                    emptyMessage = 'Tidak ada tugas yang sedang melayang.';
+                    emptySub = 'Semua misi telah tercapai dan naik ke nirwana.';
+                } else if (currentFilter === 'completed') {
+                    emptyMessage = 'Belum ada tugas yang diselesaikan.';
+                    emptySub = 'Centang salah satu tugas untuk menyematkan stempel hanko 完了.';
+                }
+
+                todoContainer.innerHTML = `
+                    <div class="py-16 px-6 text-center rounded-2xl bg-void-900/40 border border-white/5 backdrop-blur-md">
+                        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-soul-cyan/10 border border-soul-cyan/20 text-soul-glow text-3xl mb-3 shadow-[0_0_20px_rgba(56,189,248,0.2)]">
+                            ⛩
+                        </div>
+                        <h3 class="text-base font-serif font-bold text-sumi-white tracking-wider mb-1">
+                            ${emptyMessage}
+                        </h3>
+                        <p class="text-xs font-serif text-sumi-muted max-w-sm mx-auto">
+                            ${emptySub}
+                        </p>
+                        ${todos.length === 0 ? `
+                            <button onclick="resetDefaultTasks()" class="mt-4 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-soul-cyan border border-soul-cyan/30 text-xs font-serif tracking-wider transition-all">
+                                ✦ Muat Contoh Tugas Kosmik ✦
+                            </button>
+                        ` : ''}
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+
+            filteredTodos.forEach((item) => {
+                const isCompleted = item.completed;
+                const tilt = item.tilt || '0deg';
+                const animClass = item.animClass || 'float-organics-1';
+
+                // Tag badge color styling
+                let tagColorClass = 'text-sumi-silver border-white/10 bg-white/5';
+                if (item.tag === '修行') tagColorClass = 'text-soul-cyan border-soul-cyan/30 bg-soul-cyan/10';
+                else if (item.tag === '精神') tagColorClass = 'text-purple-300 border-purple-500/30 bg-purple-500/10';
+                else if (item.tag === '極秘') tagColorClass = 'text-torii-glow border-torii-crimson/30 bg-torii-crimson/10';
+                else if (item.tag === '読書') tagColorClass = 'text-emerald-300 border-emerald-500/30 bg-emerald-500/10';
+
+                html += `
+                    <div 
+                        id="${item.id}"
+                        style="--card-tilt: ${tilt}; transform: rotate(${tilt});"
+                        class="magnetic-card ${animClass} relative group rounded-2xl p-4 sm:p-5 border transition-all duration-300 backdrop-blur-md
+                            ${isCompleted 
+                                ? 'card-ascended' 
+                                : 'bg-void-900/65 border-white/10 hover:border-soul-cyan/50 shadow-washi-card'
+                            }"
+                    >
+                        <div class="flex items-start sm:items-center justify-between gap-3.5">
+                            
+                            <!-- Left: Soul Checkbox Toggle -->
+                            <button 
+                                onclick="toggleTodo('${item.id}')"
+                                title="${isCompleted ? 'Batalkan Status Selesai' : 'Tandai Selesai (完了)'}"
+                                class="mt-0.5 sm:mt-0 flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center transition-all duration-300 cursor-pointer
+                                    ${isCompleted 
+                                        ? 'bg-torii-crimson text-white shadow-torii-glow scale-105' 
+                                        : 'bg-void-950/80 border border-white/20 hover:border-soul-cyan hover:shadow-soul-glow text-transparent hover:text-soul-cyan/50'
+                                    }"
+                            >
+                                <svg class="w-3.5 h-3.5 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </button>
+
+                            <!-- Center: Task Description & Metadata -->
+                            <div class="flex-1 min-w-0 pr-2">
+                                <div class="flex items-center gap-2 flex-wrap mb-1">
+                                    <!-- Tag Badge -->
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-serif border tracking-wider ${tagColorClass}">
+                                        #${item.tag}
+                                    </span>
+
+                                    <!-- Launch Time -->
+                                    <span class="text-[10px] font-mono text-sumi-muted/70 tracking-widest">
+                                        投入: ${item.createdAt || '08:00 AM'}
+                                    </span>
+                                </div>
+
+                                <!-- Task Title -->
+                                <p class="text-sm sm:text-base font-sans transition-all duration-300 break-words leading-relaxed
+                                    ${isCompleted 
+                                        ? 'line-through text-sumi-muted/60 italic font-serif' 
+                                        : 'text-sumi-white font-medium drop-shadow-sm'
+                                    }"
+                                >
+                                    ${escapeHTML(item.task)}
+                                </p>
+                            </div>
+
+                            <!-- Right: Hanko Seal or Delete Kanji Button -->
+                            <div class="flex items-center gap-2 flex-shrink-0 self-center">
+                                ${isCompleted ? `
+                                    <!-- Glowing Red Hanko Stamp (完了) -->
+                                    <div class="hanko-seal text-xs sm:text-sm">
+                                        完了
+                                    </div>
+                                ` : ''}
+
+                                <!-- Delete Button (Kanji: 消去 / 解除) -->
+                                <button 
+                                    onclick="deleteTodo('${item.id}')"
+                                    title="Lepaskan tugas ke kosmik (Hapus)"
+                                    class="opacity-40 group-hover:opacity-100 hover:text-torii-glow px-2 py-1 rounded text-xs font-serif transition-all hover:bg-torii-crimson/10 border border-transparent hover:border-torii-crimson/30 flex items-center gap-1"
+                                >
+                                    <span class="text-[10px] font-mono tracking-tighter sm:inline hidden">RELEASE //</span>
+                                    <span>消去</span>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                `;
+            });
+
+            todoContainer.innerHTML = html;
+        }
+
+        function escapeHTML(str) {
+            return str
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        // Visual Spark Burst when Stamped
+        function triggerStardustBurst(taskId) {
+            const el = document.getElementById(taskId);
+            if (!el) return;
+
+            const rect = el.getBoundingClientRect();
+            for (let i = 0; i < 12; i++) {
+                spawnFloatingMote(rect.left + rect.width * 0.8, rect.top + rect.height * 0.5);
+            }
+        }
+
+        function spawnFloatingMote(x, y) {
+            const mote = document.createElement('div');
+            mote.className = 'fixed pointer-events-none rounded-full z-50';
+            const size = Math.random() * 5 + 3;
+            mote.style.width = size + 'px';
+            mote.style.height = size + 'px';
+            mote.style.backgroundColor = Math.random() > 0.5 ? '#e63946' : '#38bdf8';
+            mote.style.boxShadow = `0 0 10px ${mote.style.backgroundColor}`;
+            mote.style.left = x + 'px';
+            mote.style.top = y + 'px';
+
+            document.body.appendChild(mote);
+
+            const destX = (Math.random() - 0.5) * 120;
+            const destY = -Math.random() * 80 - 20;
+
+            mote.animate([
+                { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+                { transform: `translate(${destX}px, ${destY}px) scale(0)`, opacity: 0 }
+            ], {
+                duration: 600 + Math.random() * 400,
+                easing: 'cubic-bezier(0, 0, 0.2, 1)'
+            }).onfinish = () => {
+                mote.remove();
+            };
+        }
+
+        // -------------------------------------------------------------
+        // 5. UPWARD FLOATING DRIFT CANVAS (SAKURA PETALS & ZEN STARDUST)
+        // -------------------------------------------------------------
+        const canvas = document.getElementById('voidCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = 0;
+        let height = 0;
+        let particles = [];
+        const PARTICLE_COUNT = 45; // Smooth 60fps performance
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class ZeroGravityParticle {
+            constructor() {
+                this.reset(true);
+            }
+
+            reset(initial = false) {
+                this.x = Math.random() * width;
+                this.y = initial ? Math.random() * height : height + 20;
+                this.type = Math.random() > 0.45 ? 'sakura' : 'stardust';
+
+                if (this.type === 'sakura') {
+                    // Sakura Petal properties
+                    this.size = Math.random() * 7 + 6;
+                    this.vy = -(Math.random() * 0.7 + 0.35); // Slow upward drift
+                    this.vx = (Math.random() - 0.5) * 0.5;
+                    this.swaySpeed = Math.random() * 0.02 + 0.01;
+                    this.swayOffset = Math.random() * Math.PI * 2;
+                    this.rotation = Math.random() * Math.PI * 2;
+                    this.rotationSpeed = (Math.random() - 0.5) * 0.02;
+                    this.opacity = Math.random() * 0.45 + 0.25;
+                    // Sakura palette: soft petal pink to ethereal cyan
+                    this.color = Math.random() > 0.25 
+                        ? 'rgba(244, 114, 182,' 
+                        : 'rgba(103, 232, 249,';
+                } else {
+                    // Zen Stardust Speck
+                    this.size = Math.random() * 2.2 + 0.8;
+                    this.vy = -(Math.random() * 0.5 + 0.2); // Upward float
+                    this.vx = (Math.random() - 0.5) * 0.3;
+                    this.swaySpeed = Math.random() * 0.03 + 0.015;
+                    this.swayOffset = Math.random() * Math.PI * 2;
+                    this.opacity = Math.random() * 0.6 + 0.2;
+                    this.color = Math.random() > 0.5 ? 'rgba(56, 189, 248,' : 'rgba(230, 57, 70,';
+                }
+            }
+
+            update(time) {
+                this.y += this.vy;
+                this.x += Math.sin(time * this.swaySpeed + this.swayOffset) * 0.7 + this.vx;
+
+                if (this.type === 'sakura') {
+                    this.rotation += this.rotationSpeed;
+                }
+
+                // If particle reaches top of cosmic screen, reset to bottom
+                if (this.y < -30 || this.x < -40 || this.x > width + 40) {
+                    this.reset(false);
+                }
+            }
+
+            draw(ctx) {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+
+                if (this.type === 'sakura') {
+                    ctx.rotate(this.rotation);
+                    ctx.fillStyle = `${this.color}${this.opacity})`;
+                    ctx.beginPath();
+                    // Draw organic sakura petal shape
+                    ctx.moveTo(0, -this.size);
+                    ctx.quadraticCurveTo(this.size * 0.8, -this.size * 0.5, this.size * 0.6, this.size * 0.5);
+                    ctx.quadraticCurveTo(0, this.size, -this.size * 0.6, this.size * 0.5);
+                    ctx.quadraticCurveTo(-this.size * 0.8, -this.size * 0.5, 0, -this.size);
+                    ctx.closePath();
+                    ctx.fill();
+                } else {
+                    // Stardust Zen Mote with soft celestial glow
+                    ctx.fillStyle = `${this.color}${this.opacity})`;
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = this.color.replace('rgba', 'rgb').slice(0, -1) + ')';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                ctx.restore();
+            }
+        }
+
+        // Initialize particles
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+            particles.push(new ZeroGravityParticle());
+        }
+
+        let animationFrameId;
+        function animateCanvas(time) {
+            ctx.clearRect(0, 0, width, height);
+
+            const t = time * 0.001;
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update(t);
+                particles[i].draw(ctx);
+            }
+
+            animationFrameId = requestAnimationFrame(animateCanvas);
+        }
+        animationFrameId = requestAnimationFrame(animateCanvas);
+
+        // -------------------------------------------------------------
+        // 6. INITIALIZATION
+        // -------------------------------------------------------------
+        renderTodos();
+    </script>
+</body>
+</html>
+

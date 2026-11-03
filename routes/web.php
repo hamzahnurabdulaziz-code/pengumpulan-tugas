@@ -1,8 +1,7 @@
 <?php
 
+use App\Livewire\TodoList;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TodoController;
 
-Route::resource('todos', TodoController::class);
-
-Route::redirect('/', '/todos');
+Route::get('/', TodoList::class)->name('home');
+Route::get('/todos', TodoList::class)->name('todos.index');
